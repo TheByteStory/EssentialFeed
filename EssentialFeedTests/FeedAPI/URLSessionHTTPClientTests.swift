@@ -78,10 +78,12 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     // MARK :- Helpers
     
-    private func makeSUT() -> URLSessionHTTPClient()
+    private func makeSUT() -> URLSessionHTTPClient
     {
-    return URLSessionHTTPClient
+    return URLSessionHTTPClient()
     }
+    
+    
     
     private class URLProtocolStub: URLProtocol{
         
