@@ -92,8 +92,6 @@ class RemoteFeedLoaderTests : XCTestCase
             id: UUID(),
             imageURL: URL(string: "http://a-url.com")!)
         
-        
-        
         let item2 = makeItem(
             id: UUID(),
             description: "a description ",

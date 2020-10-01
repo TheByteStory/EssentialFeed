@@ -10,9 +10,6 @@ import XCTest
 import EssentialFeed
 
 
-
-
-
 class URLSessionHTTPClientTests: XCTestCase {
  
     override func setUp() {
@@ -169,7 +166,6 @@ class URLSessionHTTPClientTests: XCTestCase {
     {
     return URLResponse(url: anyURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }
-
     
     private class URLProtocolStub: URLProtocol{
         
@@ -181,8 +177,6 @@ class URLSessionHTTPClientTests: XCTestCase {
             let response : URLResponse?
             let error : Error?
         }
-        
-        
         
         static func stub(data: Data?, response: URLResponse?, error: Error?) {
              stub = Stub(data: data, response: response, error: error)
