@@ -26,6 +26,13 @@ class RemoteFeedLoaderTests : XCTestCase
         let (sut,client) = makeSUT(givenurl:givenurl)
         sut.load{_ in }
         XCTAssertEqual(client.requestedURLs,[givenurl])
+        
+        
+//        let url = www.amazon.com
+//        let(sut,client) = makeSUT(url)
+//        sut = RemoteFeedLoader
+//        client = HttpClientSpy - loadresult - success, failure - urlresponse
+//        sut.load
     }
     
     func test_loadTwice_requestsDataFromURLTwice()
