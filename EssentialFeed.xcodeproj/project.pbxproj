@@ -131,13 +131,13 @@
 			path = "Feed Cache";
 			sourceTree = "<group>";
 		};
-		3B448AF9254846610024DA93 /* New Group */ = {
+		3B448AF9254846610024DA93 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
 				3B448AFA254846810024DA93 /* LocalFeedLoader.swift */,
 				3B448AFC254847380024DA93 /* FeedStore.swift */,
 			);
-			path = "New Group";
+			path = "Feed Cache";
 			sourceTree = "<group>";
 		};
 		3BE0F25724F8ACF20083D866 = {
@@ -164,7 +164,7 @@
 		3BE0F26324F8ACF20083D866 /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
-				3B448AF9254846610024DA93 /* New Group */,
+				3B448AF9254846610024DA93 /* Feed Cache */,
 				3BE0F28124F9E9B80083D866 /* Feed API */,
 				3BE0F26424F8ACF20083D866 /* EssentialFeed.h */,
 				3BE0F26524F8ACF20083D866 /* Info.plist */,
