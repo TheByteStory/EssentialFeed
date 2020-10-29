@@ -43,6 +43,10 @@ public final class LocalFeedLoader
             if let error = error {
                 completion(.failure(error))
             }
+            else
+            {
+                completion(.success([]))
+            }
             
         }
     }
