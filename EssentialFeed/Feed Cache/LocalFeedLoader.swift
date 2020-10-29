@@ -22,7 +22,7 @@ public final class LocalFeedLoader
     
     public func save(_ feed:[FeedImage], completion:@escaping (SaveResult) -> Void)
     {
-        store.deleteCachedFeed{[weak self] error in
+            store.deleteCachedFeed{[weak self] error in
             guard let self = self else { return }
             if let cacheDeletionError = error
             {
@@ -34,6 +34,11 @@ public final class LocalFeedLoader
             }
             }
             
+    }
+    
+    public func load()
+    {
+        store.retrieve()
     }
     
     private func cache(_ feed: [FeedImage], with completion: @escaping(SaveResult) -> Void)

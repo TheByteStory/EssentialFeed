@@ -17,8 +17,19 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation()
     {
         let (_,store) = makeSUT()
-        //let _ = LocalFeedLoader(store:store,timestamp:Date())
+        
         XCTAssertEqual(store.receivedMessages, [])
+
+    }
+    
+    //Cache retrieval from feedstore
+    func test_load_requestsCacheRetrieval()
+    {
+        let (sut,store) = makeSUT()
+        
+        sut.load()
+               
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
 
     }
     
