@@ -100,7 +100,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
     }
     
     //Delete cache on retrieval error
-    func test_load_deletesCacheOnRetrievalError()
+    func test_load_hasNoSideEffectsOnRetrievalError()
     {
         let(sut,store) = makeSUT()
         
@@ -108,7 +108,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
         store.completeRetrieval(with: anyNSError())
         
-        XCTAssertEqual(store.receivedMessages,[.retrieve,.deleteCachedFeed])
+        XCTAssertEqual(store.receivedMessages,[.retrieve])
     }
     
     //Does not delete cache on empty cache
