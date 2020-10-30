@@ -143,7 +143,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
     
     
     //Should delete 7 days old cache
-    func test_load_deletesCacheOnSevenDaysOldCache()
+    func test_load_hasNoSideEffectsOnSevenDaysOldCache()
     {
         let feed = uniqueImageFeed()
         
@@ -157,11 +157,11 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
         store.completeRetrieval(with: feed.local, timestamp: sevenDaysOldTimestamp)
         
-        XCTAssertEqual(store.receivedMessages,[.retrieve,.deleteCachedFeed])
+        XCTAssertEqual(store.receivedMessages,[.retrieve])
     }
     
     //Should delete more than 7 days old cache
-    func test_load_deletesCacheOnMoreThanSevenDaysOldCache()
+    func test_load_hasNoSideEffectsOnMoreThanSevenDaysOldCache()
     {
         let feed = uniqueImageFeed()
         
@@ -175,7 +175,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
         store.completeRetrieval(with: feed.local, timestamp: moreThanSevenDaysOldTimestamp)
         
-        XCTAssertEqual(store.receivedMessages,[.retrieve,.deleteCachedFeed])
+        XCTAssertEqual(store.receivedMessages,[.retrieve])
     }
     
     //No result after the instance has been deallocated
