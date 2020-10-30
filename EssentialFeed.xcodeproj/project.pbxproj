@@ -24,6 +24,8 @@
 		3B448B05254A64EE0024DA93 /* LoadFeedFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B448B04254A64EE0024DA93 /* LoadFeedFromCacheUseCaseTests.swift */; };
 		3B448B08254A66F70024DA93 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B448B07254A66F70024DA93 /* FeedStoreSpy.swift */; };
 		3B644B8E254BF03500237DC2 /* ValidateFeedCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B644B8D254BF03500237DC2 /* ValidateFeedCacheUseCaseTests.swift */; };
+		3B644B90254BF5BC00237DC2 /* FeedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B644B8F254BF5BC00237DC2 /* FeedCacheTestHelpers.swift */; };
+		3B644B92254BF68800237DC2 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B644B91254BF68800237DC2 /* SharedTestHelpers.swift */; };
 		3BD605742500921A00D8D5E1 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE0F28224F9E9E30083D866 /* RemoteFeedLoader.swift */; };
 		3BE0F26B24F8ACF20083D866 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE0F26124F8ACF20083D866 /* EssentialFeed.framework */; };
 		3BE0F27024F8ACF20083D866 /* EssentialFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE0F26F24F8ACF20083D866 /* EssentialFeedTests.swift */; };
@@ -68,6 +70,8 @@
 		3B448B04254A64EE0024DA93 /* LoadFeedFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		3B448B07254A66F70024DA93 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedStoreSpy.swift; path = "EssentialFeedTests/Feed Cache/Helpers/FeedStoreSpy.swift"; sourceTree = SOURCE_ROOT; };
 		3B644B8D254BF03500237DC2 /* ValidateFeedCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		3B644B8F254BF5BC00237DC2 /* FeedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCacheTestHelpers.swift; sourceTree = "<group>"; };
+		3B644B91254BF68800237DC2 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		3BE0F26124F8ACF20083D866 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE0F26424F8ACF20083D866 /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		3BE0F26524F8ACF20083D866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				3B43D086252353A4006FB77C /* XCTestCase+MemoryLeakTrackingHelper.swift */,
+				3B644B91254BF68800237DC2 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				3B448B07254A66F70024DA93 /* FeedStoreSpy.swift */,
+				3B644B8F254BF5BC00237DC2 /* FeedCacheTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -388,8 +394,10 @@
 			files = (
 				3BE0F28024F9E6550083D866 /* RemoteFeedLoaderTests.swift in Sources */,
 				3B43D084251D926F006FB77C /* URLSessionHTTPClientTests.swift in Sources */,
+				3B644B92254BF68800237DC2 /* SharedTestHelpers.swift in Sources */,
 				3BE0F27024F8ACF20083D866 /* EssentialFeedTests.swift in Sources */,
 				3B448AF82546EFDF0024DA93 /* CacheFeedUseCaseTests.swift in Sources */,
+				3B644B90254BF5BC00237DC2 /* FeedCacheTestHelpers.swift in Sources */,
 				3B644B8E254BF03500237DC2 /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				3B448B08254A66F70024DA93 /* FeedStoreSpy.swift in Sources */,
 				3B448B05254A64EE0024DA93 /* LoadFeedFromCacheUseCaseTests.swift in Sources */,
