@@ -41,7 +41,7 @@ public final class LocalFeedLoader
    
 }
 
-extension LocalFeedLoader{
+extension LocalFeedLoader: FeedLoader{
     
     public func save(_ feed:[FeedImage], completion:@escaping (SaveResult) -> Void)
     {
