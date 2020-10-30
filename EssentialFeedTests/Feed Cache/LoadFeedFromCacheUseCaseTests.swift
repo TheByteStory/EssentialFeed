@@ -124,7 +124,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
        }
 
     //Does not delete cache on less than seven days old cache
-    func test_load_doesNotDeleteCacheOnLessThanSevenDaysOldCache()
+    func test_load_hasNoSideEffectsOnLessThanSevenDaysOldCache()
     {
         let feed = uniqueImageFeed()
         
