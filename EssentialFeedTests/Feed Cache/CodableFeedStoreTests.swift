@@ -77,12 +77,12 @@ class CodableFeedStoreTests: XCTestCase {
     //Remove artifacts every time - use setup instead of teardown
     override func setUp() {
         super.setUp()
-        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+        setupEmptyStoreState()
     }
     
     override func tearDown() {
         super.tearDown()
-        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+        UndoStoreSideEffects()
     }
 
     //Show empty on Empty cache - retrieves once
@@ -163,6 +163,22 @@ class CodableFeedStoreTests: XCTestCase {
     {
         //type of self is the class name : CodableFeedStoreTests
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of:self)).store")
+    }
+    
+    private func setupEmptyStoreState()
+    {
+        deleteStoreArtifacts()
+    }
+    
+    private func UndoStoreSideEffects()
+    {
+        deleteStoreArtifacts()
+    }
+    
+    private func deleteStoreArtifacts()
+    {
+        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+
     }
 
 }
