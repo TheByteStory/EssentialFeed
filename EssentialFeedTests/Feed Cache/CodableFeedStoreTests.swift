@@ -11,13 +11,47 @@ import EssentialFeed
 
 class CodableFeedStore
 {
+    //Codable - type alias confirming to both encodable and decodable protocols
+    private struct Cache : Codable {
+        let feed : [LocalFeedImage]
+        let timestamp : Date
+    }
+    
+    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+    
+    //Decode the cache model
     func retrieve(completion : @escaping FeedStore.RetrievalCompletion)
     {
-        completion(.empty)
+        guard let data = try? Data(contentsOf: storeURL) else {
+            return completion(.empty)
+        }
+        
+        let decoder = JSONDecoder()
+        let cache = try! decoder.decode(Cache.self, from: data)
+        completion(.found(feed: cache.feed, timestamp: cache.timestamp))
+        
+    }
+    
+    //Encode the cache model
+    func insert(_ feed: [LocalFeedImage],timestamp:Date, completion:@escaping FeedStore.InsertionCompletion)
+    {
+        let encoder = JSONEncoder()
+        let encoded = try! encoder.encode(Cache(feed: feed, timestamp: timestamp))
+        //storeURL is a location in the disk
+        try! encoded.write(to:storeURL)
+        completion(nil)
     }
 }
 
 class CodableFeedStoreTests: XCTestCase {
+    
+    //Remove artifacts every time - use setup instead of teardown
+    override func setUp() {
+        super.setUp()
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+        
+        try? FileManager.default.removeItem(at: storeURL)
+    }
 
     //Show empty on Empty cache - retrieves once
     func test_retrieve_deliversEmptyOnEmptyCache()
@@ -41,6 +75,7 @@ class CodableFeedStoreTests: XCTestCase {
     //retrieving cache twice without side effects
     func test_retrieve_hasNoSideEffectsOnEmptyCache()
     {
+        
     let sut = CodableFeedStore()
     let exp = expectation(description: "Wait for cache retrieval")
 
@@ -58,21 +93,29 @@ class CodableFeedStoreTests: XCTestCase {
         wait(for:[exp], timeout: 1.0)
     }
     
+    //Both cases - insert and retrieve - Empty cache stores data and non-empty cache shows data
+    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues()
+    {
+    let sut = CodableFeedStore()
+    let feed = uniqueImageFeed().local
+    let timestamp = Date()
+    let exp = expectation(description: "Wait for cache retrieval")
 
-    
-//    //With Non Empty cache,override the old value
-//    func test_retrieve_nonEmptyCacheOverridesPreviousValue()
-//    {
-//        let sut = CodableFeedStore()
-//        let exp = expectation(description: "Wait for cahe retrieval")
-//
-//        sut.retrieve{ result in
-//
-//            switch result{
-//            case (notempty):
-//                delete old cache
-//                replace with new cache
-//            }
-//        }
-//    }
+        sut.insert(feed,timestamp: timestamp){ insertionError in
+            XCTAssertNil(insertionError,"Expected feed to be inserted successfully")
+            
+            sut.retrieve{ retrieveResult in
+                    switch (retrieveResult) {
+                    case let .found(retrievedFeed,retrivedTimestamp):
+                        XCTAssertEqual(retrievedFeed,feed)
+                        XCTAssertEqual(retrivedTimestamp,timestamp)
+                    default:
+                        XCTFail("Expected found result with \(feed) and \(timestamp), got \(retrieveResult) instead")
+                    }
+                    exp.fulfill()
+                }
+        }
+        wait(for:[exp], timeout: 1.0)
+    }
+
 }
