@@ -9,7 +9,7 @@
 import XCTest
 import EssentialFeed
 
-class CodableFeedStore
+class CodableFeedStore : FeedStore
 {
     //Codable - type alias confirming to both encodable and decodable protocols
     private struct Cache : Codable {
@@ -48,7 +48,7 @@ class CodableFeedStore
     }
     
     //Decode the cache model
-    func retrieve(completion : @escaping FeedStore.RetrievalCompletion)
+    func retrieve(completion : @escaping RetrievalCompletion)
     {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
@@ -67,7 +67,7 @@ class CodableFeedStore
     }
     
     //Encode the cache model
-    func insert(_ feed: [LocalFeedImage],timestamp:Date, completion:@escaping FeedStore.InsertionCompletion)
+    func insert(_ feed: [LocalFeedImage],timestamp:Date, completion:@escaping InsertionCompletion)
     {
         do {
             let encoder = JSONEncoder()
@@ -81,7 +81,7 @@ class CodableFeedStore
         }
     }
     
-    func deleteCachedFeed(completion: @escaping FeedStore.DeletionCompletion) {
+    func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
              return completion(nil)
          }
