@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Foundation
+import EssentialFeed
 
 extension FeedStoreSpecs where Self:XCTestCase{
     
