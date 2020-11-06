@@ -102,7 +102,7 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     //Both cases - insert and retrieve - Empty cache stores data and non-empty cache shows data
-    func test_retrieve_deliversFoundValuesOnEmptyCache()
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache()
     {
         let sut = makeSUT()
         let feed = uniqueImageFeed().local
