@@ -10,9 +10,7 @@ import XCTest
 import EssentialFeed
 
 
-
-typealias FailableFeedStore = FailableRetrieveFeedStoreSpecs & FailableInsertFeedStoreSpecs & FailableDeleteFeedStoreSpecs
-class CodableFeedStoreTests: XCTestCase, FailableFeedStore  {
+class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs  {
    
     
     //Remove artifacts every time - use setup instead of teardown
