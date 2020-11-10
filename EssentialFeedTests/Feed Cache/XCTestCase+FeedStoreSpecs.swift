@@ -11,19 +11,24 @@ import EssentialFeed
 
 extension FeedStoreSpecs where Self:XCTestCase{
     
-@discardableResult
- func insert(_ cache: (feed: [LocalFeedImage], timestamp: Date), to sut: FeedStore) -> Error? {
-        let exp = expectation(description: "Wait for cache insertion")
-       
-           var insertionError: Error?
-           sut.insert(cache.feed, timestamp: cache.timestamp) { receivedInsertionError in
-               insertionError = receivedInsertionError
-               
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        return insertionError
+    func assertThatRetrieveDeliversEmptyOnEmptyCache(on sut:FeedStore,file:StaticString = #file, line:UInt = #line)
+    {
+        expect(sut,toRetrieve: .empty,file: file,line: line)
     }
+    
+    @discardableResult
+     func insert(_ cache: (feed: [LocalFeedImage], timestamp: Date), to sut: FeedStore) -> Error? {
+            let exp = expectation(description: "Wait for cache insertion")
+           
+               var insertionError: Error?
+               sut.insert(cache.feed, timestamp: cache.timestamp) { receivedInsertionError in
+                   insertionError = receivedInsertionError
+                   
+                exp.fulfill()
+            }
+            wait(for: [exp], timeout: 1.0)
+            return insertionError
+        }
    
    @discardableResult
     func deleteCache(from sut: FeedStore) -> Error? {
