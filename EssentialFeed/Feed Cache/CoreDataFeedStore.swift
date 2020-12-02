@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+
 public final class CoreDataFeedStore: FeedStore {
     
     private let container: NSPersistentContainer
@@ -22,8 +23,7 @@ public final class CoreDataFeedStore: FeedStore {
 
    public func retrieve(completion: @escaping RetrievalCompletion) {
        completion(.empty)
-    let context = self.context
-    context.perform {
+    perform { context in
         do {
             if let cache = try ManagedCache.find(in: context) {
                 completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
@@ -37,8 +37,7 @@ public final class CoreDataFeedStore: FeedStore {
    }
 
    public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
-    let context = self.context
-    context.perform {
+    perform { context in
         do {
             let managedCache = try ManagedCache.newUniqueInstance(in: context)
             managedCache.timestamp = timestamp
@@ -54,8 +53,20 @@ public final class CoreDataFeedStore: FeedStore {
    }
 
    public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-
+       perform { context in
+             do {
+                 try ManagedCache.find(in: context).map(context.delete).map(context.save)
+                 completion(nil)
+             } catch {
+                 completion(error)
+             }
+         }
    }
+    
+    private func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
+         let context = self.context
+         context.perform { action(context) }
+     }
     
 }
 
@@ -98,6 +109,11 @@ private class ManagedCache: NSManagedObject {
          return try context.fetch(request).first
      }
     
+    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
+        try find(in: context).map(context.delete)
+        return ManagedCache(context: context)
+    }
+    
     var localFeed: [LocalFeedImage] {
          return feed.compactMap { ($0 as? ManagedFeedImage)?.local }
      }
@@ -122,10 +138,7 @@ private class ManagedFeedImage: NSManagedObject {
          })
      }
     
-    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
-         try find(in: context).map(context.delete)
-         return ManagedCache(context: context)
-     }
+    
 
      var local: LocalFeedImage {
         return LocalFeedImage(id: id, description: imageDescription, location: location, imageURL: url)
