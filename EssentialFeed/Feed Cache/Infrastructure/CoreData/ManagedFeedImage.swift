@@ -30,9 +30,7 @@ internal class ManagedFeedImage: NSManagedObject {
          })
      }
     
-    
-
-     var local: LocalFeedImage {
+    var local: LocalFeedImage {
         return LocalFeedImage(id: id, description: imageDescription, location: location, imageURL: url)
      }
 }
