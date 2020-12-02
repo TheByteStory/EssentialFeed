@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 public class CodableFeedStore : FeedStore
 {
     //Codable - type alias confirming to both encodable and decodable protocols

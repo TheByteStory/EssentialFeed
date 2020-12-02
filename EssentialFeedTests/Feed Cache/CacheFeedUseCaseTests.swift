@@ -9,20 +9,13 @@
 import XCTest
 import EssentialFeed
 
-
-
-
-
-
 class CacheFeedUseCaseTests: XCTestCase {
 
     //Cache deletion failure
     func test_init_doesNotMessageStoreUponCreation()
     {
         let (_,store) = makeSUT()
-        //let _ = LocalFeedLoader(store:store,timestamp:Date())
         XCTAssertEqual(store.receivedMessages, [])
-
     }
     
     //Cache deletion successful
@@ -171,8 +164,4 @@ class CacheFeedUseCaseTests: XCTestCase {
         let local = models.map { LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.url) }
         return(models,local)
     }
-
-    
-    
-
 }

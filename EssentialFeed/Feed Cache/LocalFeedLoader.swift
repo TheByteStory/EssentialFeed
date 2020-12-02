@@ -91,10 +91,7 @@ extension LocalFeedLoader{
     }
 }
     
-    
-    
-
-
+   
 //Mapping LocalFeedItem with FeedItem
 private extension Array where Element == FeedImage {
     func toLocal() -> [LocalFeedImage]{
